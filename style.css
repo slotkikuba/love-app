@@ -1,0 +1,239 @@
+/* Resetowanie marginesów i paddingów */
+body {
+    font-family: 'Inter', sans-serif;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #5D63BF;
+}
+
+/* Kontener aplikacji */
+.app-container {
+    display: grid;
+    grid-template-columns: 55% 45%; /* Procentowa szerokość kolumn */
+    grid-template-rows: 1fr;
+    justify-items: center;
+    align-items: center;
+    width: 80vw; /* Zmienna szerokość kontenera, dostosowuje się do szerokości ekranu */
+    max-width: 1200px; /* Maksymalna szerokość */
+    height: 60vh; /* Zmienna wysokość kontenera */
+    background-color: #6c5887;
+    border-radius: 25px;
+    box-shadow: 0px 0px 31px -11px rgba(0, 0, 0, 0.75);
+    padding: 20px;
+    position: relative; /* Ustawienie pozycji kontenera jako relative */
+}
+
+/* Kontener po lewej stronie */
+.left-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 5px;
+    border-radius: 12px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Kontener serca - Heart Container */
+.heart-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 450px;
+    height: 100%;
+    transition: transform 0.3s ease; /* Animacja przy interakcji */
+}
+
+/* .heart-container:hover {
+    transform: scale(1.05); Powiększenie kontenera po najechaniu
+} */
+
+/* Nagłówek */
+.heart-container h1,
+.heart-container h2,
+.heart-container h3,
+.heart-container p {
+    color: #fff;
+    margin: 8px 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* H1 – największy, miłosny klimat */
+.heart-container h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #FFB6C1;
+    animation: pulse 3s infinite;
+}
+
+/* H2 – delikatniejszy akcent */
+.heart-container h2 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #ffe6f0;
+}
+
+/* H3 – mały tekst z emocjami */
+.heart-container h3 {
+    font-size: 1rem;
+    font-style: italic;
+    color: #e0d2ff;
+}
+
+/* P – klasyczne zakończenie */
+.heart-container p {
+    font-size: 0.9rem;
+    color: #ddd;
+}
+
+/* Pulsujące serduszko do H1 (opcjonalnie do emocji) */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+/* Timer i inne teksty */
+span {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 1rem;
+    gap: 15px;
+    color: #fff;
+}
+
+.timer {
+    margin-top: 10px;
+}
+
+/* Lista poniżej */
+ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    width: 100%;
+    grid-column: 1 / span 2;
+}
+
+li {
+    margin: 0 10px;
+}
+
+/* Iframe */
+iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Media Queries dla urządzeń mobilnych */
+@media screen and (max-width: 768px) {
+    /* Zmniejszenie szerokości kontenera i kolumn */
+    .app-container {
+        grid-template-columns: 1fr; /* Jedna kolumna na mniejszych ekranach */
+        width: 90vw;
+        height: auto;
+    }
+
+    /* Zmniejszenie czcionki nagłówka */
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1rem;
+    }
+
+    /* Zmniejszenie marginesów i paddingów */
+    .heart-container {
+        padding: 15px;
+    }
+
+    iframe {
+        height: 250px; /* Ustalenie proporcji wysokości iframe */
+    }
+
+    ul {
+        flex-direction: column; /* Zmiana układu listy na kolumnowy */
+        gap: 10px;
+    }
+
+    li {
+        margin: 5px 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    /* Zmiana na jeszcze mniejszym ekranie */
+    .app-container {
+        width: 95vw;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .heart-container {
+        padding: 10px;
+    }
+
+    iframe {
+        height: 200px;
+    }
+
+    ul {
+        gap: 8px;
+    }
+}
+
+.pusheen-cat {
+    position: absolute; /* Pozycjonowanie absolutne względem app-container */
+    width: 100px; /* Dostosuj rozmiar obrazka */
+    height: auto; /* Zachowaj proporcje obrazka */
+    z-index: 10; /* Ustaw wyższy z-index, aby obrazek był nad innymi elementami */
+}
+
+.pusheen-left {
+    top: -20px; /* Dostosuj, aby kot wystawał zza górnej krawędzi */
+    left: -20px; /* Dostosuj, aby kot wystawał zza lewej krawędzi */
+}
+
+.pusheen-right {
+    top: -20px; /* Dostosuj, aby kot wystawał zza górnej krawędzi */
+    right: -20px; /* Dostosuj, aby kot wystawał zza prawej krawędzi */
+    transform: scaleX(-1); /* Lustrzane odbicie w poziomie */
+}
+
+.gallery-image {
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+    margin: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
