@@ -1,4 +1,15 @@
-/* Resetowanie marginesów i paddingów */
+/* Base styles and resets */
+:root {
+    --container-width: clamp(300px, 80vw, 1200px);
+    --container-height: clamp(500px, 70vh, 800px);
+    --font-size-base: clamp(14px, 1vw + 8px, 18px);
+    --font-size-h1: clamp(1.5rem, 3vw + 1rem, 2.5rem);
+    --font-size-h2: clamp(1.2rem, 2vw + 0.5rem, 1.8rem);
+    --font-size-h3: clamp(1rem, 1.5vw + 0.5rem, 1.3rem);
+    --spacing-base: clamp(10px, 2vw, 20px);
+    --border-radius: clamp(15px, 2vw, 25px);
+}
+
 body {
     font-family: 'Inter', sans-serif;
     padding: 0;
@@ -6,25 +17,60 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #5D63BF;
+    min-height: 100vh;
+    background-color: #1a1b3d;
+    position: relative;
+    overflow: hidden;
+    font-size: var(--font-size-base);
+}
+
+/* Stars background */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle var(--duration) ease-in-out infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 /* Kontener aplikacji */
 .app-container {
     display: grid;
-    grid-template-columns: 55% 45%; /* Procentowa szerokość kolumn */
-    grid-template-rows: 1fr;
-    justify-items: center;
-    align-items: center;
-    width: 80vw; /* Zmienna szerokość kontenera, dostosowuje się do szerokości ekranu */
-    max-width: 1200px; /* Maksymalna szerokość */
-    height: 60vh; /* Zmienna wysokość kontenera */
-    background-color: #6c5887;
-    border-radius: 25px;
-    box-shadow: 0px 0px 31px -11px rgba(0, 0, 0, 0.75);
-    padding: 20px;
-    position: relative; /* Ustawienie pozycji kontenera jako relative */
+    grid-template-columns: minmax(0, 55%) minmax(0, 45%);
+    grid-template-rows: 1fr auto;
+    gap: var(--spacing-base);
+    width: var(--container-width);
+    height: var(--container-height);
+    background: rgba(75, 61, 139, 0.85);
+    backdrop-filter: blur(8px);
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    padding: var(--spacing-base);
+    position: relative;
+    z-index: 1;
+    margin: var(--spacing-base);
 }
 
 /* Kontener po lewej stronie */
@@ -35,9 +81,11 @@ body {
     width: 100%;
     height: 100%;
     padding: 0;
-    margin: 5px;
-    border-radius: 12px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+    margin: calc(var(--spacing-base) / 2);
+    border-radius: calc(var(--border-radius) / 2);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    aspect-ratio: 16/9;
+    max-height: 100%;
 }
 
 /* Kontener serca - Heart Container */
@@ -47,57 +95,53 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    border-radius: 20px;
-    padding: 20px;
+    border-radius: var(--border-radius);
+    padding: var(--spacing-base);
     width: 100%;
-    max-width: 450px;
     height: 100%;
-    transition: transform 0.3s ease; /* Animacja przy interakcji */
+    transition: transform 0.3s ease;
 }
 
-/* .heart-container:hover {
-    transform: scale(1.05); Powiększenie kontenera po najechaniu
-} */
-
-/* Nagłówek */
+/* Typography */
 .heart-container h1,
 .heart-container h2,
 .heart-container h3,
 .heart-container p {
     color: #fff;
-    margin: 8px 0;
+    margin: calc(var(--spacing-base) / 2) 0;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    width: 100%;
 }
 
-/* H1 – największy, miłosny klimat */
 .heart-container h1 {
-    font-size: 2.5rem;
+    font-size: var(--font-size-h1);
     font-weight: 700;
-    color: #FFB6C1;
+    color: #ffd6e7;
     animation: pulse 3s infinite;
+    line-height: 1.2;
 }
 
-/* H2 – delikatniejszy akcent */
 .heart-container h2 {
-    font-size: 1.3rem;
+    font-size: var(--font-size-h2);
     font-weight: 500;
     color: #ffe6f0;
+    line-height: 1.3;
 }
 
-/* H3 – mały tekst z emocjami */
 .heart-container h3 {
-    font-size: 1rem;
+    font-size: var(--font-size-h3);
     font-style: italic;
     color: #e0d2ff;
+    line-height: 1.4;
 }
 
-/* P – klasyczne zakończenie */
 .heart-container p {
-    font-size: 0.9rem;
+    font-size: var(--font-size-base);
     color: #ddd;
+    line-height: 1.5;
 }
 
-/* Pulsujące serduszko do H1 (opcjonalnie do emocji) */
+/* Animations */
 @keyframes pulse {
     0% {
         transform: scale(1);
@@ -113,127 +157,281 @@ body {
     }
 }
 
-
-/* Timer i inne teksty */
+/* Timer styles */
 span {
     display: flex;
-    justify-content: space-evenly;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: calc(var(--spacing-base) / 2);
     width: 100%;
-    margin-top: 10px;
-    font-size: 1rem;
-    gap: 15px;
+    margin-top: calc(var(--spacing-base) / 2);
     color: #fff;
 }
 
 .timer {
-    margin-top: 10px;
+    margin-top: var(--spacing-base);
+    display: none;
 }
 
-/* Lista poniżej */
-ul {
+/* Navigation */
+.nav-buttons {
     list-style: none;
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: calc(var(--spacing-base) / 2);
     padding: 0;
     width: 100%;
-    grid-column: 1 / span 2;
+    grid-column: 1 / -1;
+    margin-top: var(--spacing-base);
 }
 
-li {
-    margin: 0 10px;
+.nav-buttons li {
+    margin: 0;
+}
+
+.nav-buttons button {
+    background: rgba(123, 104, 238, 0.6);
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    backdrop-filter: blur(4px);
+    font-size: var(--font-size-base);
+    white-space: nowrap;
+}
+
+.nav-buttons button:hover {
+    background: rgba(147, 112, 219, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(123, 104, 238, 0.4);
+}
+
+.nav-buttons button:active {
+    transform: translateY(0);
 }
 
 /* Iframe */
 iframe {
     width: 100%;
     height: 100%;
-    border-radius: 12px;
+    border-radius: calc(var(--border-radius) / 2);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Media Queries dla urządzeń mobilnych */
-@media screen and (max-width: 768px) {
-    /* Zmniejszenie szerokości kontenera i kolumn */
+/* Gallery Styles */
+.gallery-container {
+    width: 100%;
+    height: min(300px, 50vh);
+    position: relative;
+    border-radius: calc(var(--border-radius) / 2);
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    margin: var(--spacing-base) 0;
+    display: none;
+    aspect-ratio: 16/9;
+}
+
+.gallery-slideshow {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.gallery-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    object-fit: cover;
+    border-radius: calc(var(--border-radius) / 2);
+}
+
+.gallery-slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.gallery-controls {
+    position: absolute;
+    bottom: var(--spacing-base);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    gap: calc(var(--spacing-base) / 2);
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-container:hover .gallery-controls {
+    opacity: 1;
+}
+
+.gallery-btn {
+    background: rgba(255, 255, 255, 0.7);
+    border: none;
+    width: clamp(30px, 4vw, 36px);
+    height: clamp(30px, 4vw, 36px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+}
+
+.gallery-btn:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: scale(1.1);
+}
+
+.gallery-dots {
+    position: absolute;
+    bottom: calc(var(--spacing-base) * 3);
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: calc(var(--spacing-base) / 2);
+    z-index: 2;
+}
+
+.gallery-dot {
+    width: clamp(8px, 1vw, 10px);
+    height: clamp(8px, 1vw, 10px);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gallery-dot.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+.gallery-caption {
+    position: absolute;
+    bottom: calc(var(--spacing-base) * 5);
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: white;
+    padding: var(--spacing-base);
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    font-weight: bold;
+    backdrop-filter: blur(5px);
+    font-size: var(--font-size-base);
+}
+
+/* Pusheen cats */
+.pusheen-cat {
+    position: absolute;
+    width: clamp(60px, 10vw, 100px);
+    height: auto;
+    z-index: 10;
+    transition: transform 0.3s ease;
+}
+
+.pusheen-left {
+    top: -20px;
+    left: -20px;
+}
+
+.pusheen-right {
+    top: -20px;
+    right: -20px;
+    transform: scaleX(-1);
+}
+
+/* Responsive breakpoints */
+@media screen and (max-width: 1024px) {
     .app-container {
-        grid-template-columns: 1fr; /* Jedna kolumna na mniejszych ekranach */
-        width: 90vw;
+        height: auto;
+        min-height: var(--container-height);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .app-container {
+        grid-template-columns: 1fr;
+        width: min(95vw, var(--container-width));
+    }
+
+    .left-container {
+        aspect-ratio: 16/9;
         height: auto;
     }
 
-    /* Zmniejszenie czcionki nagłówka */
-    h1 {
-        font-size: 1.8rem;
+    .gallery-container {
+        height: auto;
+        aspect-ratio: 16/9;
     }
 
-    h2 {
-        font-size: 1rem;
-    }
-
-    /* Zmniejszenie marginesów i paddingów */
-    .heart-container {
-        padding: 15px;
-    }
-
-    iframe {
-        height: 250px; /* Ustalenie proporcji wysokości iframe */
-    }
-
-    ul {
-        flex-direction: column; /* Zmiana układu listy na kolumnowy */
-        gap: 10px;
-    }
-
-    li {
-        margin: 5px 0;
+    .pusheen-cat {
+        width: clamp(40px, 8vw, 60px);
     }
 }
 
 @media screen and (max-width: 480px) {
-    /* Zmiana na jeszcze mniejszym ekranie */
+    :root {
+        --spacing-base: 10px;
+    }
+
+    .gallery-controls {
+        bottom: calc(var(--spacing-base) / 2);
+    }
+
+    .gallery-dots {
+        bottom: calc(var(--spacing-base) * 2);
+    }
+
+    .gallery-caption {
+        bottom: calc(var(--spacing-base) * 4);
+        padding: calc(var(--spacing-base) / 2);
+    }
+
+    .pusheen-cat {
+        width: clamp(30px, 6vw, 40px);
+    }
+}
+
+/* Print styles */
+@media print {
+    body {
+        background: white;
+    }
+
     .app-container {
-        width: 95vw;
-        padding: 10px;
+        box-shadow: none;
+        background: white;
     }
 
-    h1 {
-        font-size: 1.5rem;
-    }
-
-    .heart-container {
-        padding: 10px;
-    }
-
-    iframe {
-        height: 200px;
-    }
-
-    ul {
-        gap: 8px;
+    .stars,
+    .gallery-controls,
+    .nav-buttons {
+        display: none;
     }
 }
 
-.pusheen-cat {
-    position: absolute; /* Pozycjonowanie absolutne względem app-container */
-    width: 100px; /* Dostosuj rozmiar obrazka */
-    height: auto; /* Zachowaj proporcje obrazka */
-    z-index: 10; /* Ustaw wyższy z-index, aby obrazek był nad innymi elementami */
-}
-
-.pusheen-left {
-    top: -20px; /* Dostosuj, aby kot wystawał zza górnej krawędzi */
-    left: -20px; /* Dostosuj, aby kot wystawał zza lewej krawędzi */
-}
-
-.pusheen-right {
-    top: -20px; /* Dostosuj, aby kot wystawał zza górnej krawędzi */
-    right: -20px; /* Dostosuj, aby kot wystawał zza prawej krawędzi */
-    transform: scaleX(-1); /* Lustrzane odbicie w poziomie */
-}
-
-.gallery-image {
-    width: 150px;
-    height: auto;
-    border-radius: 10px;
-    margin: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .star,
+    .heart-container h1,
+    .nav-buttons button,
+    .gallery-slide,
+    .pusheen-cat {
+        animation: none;
+        transition: none;
+    }
 }

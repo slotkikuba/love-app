@@ -6,9 +6,11 @@
     <title>love app type shi 🔥 ❤️</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" 
-          integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM8z4+2e5c7e5a5b5e5c5e5c5e5c5e5c5e5c5e5c5e5c5e5c5" crossorigin="anonymous">
+          integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="shortcut icon" href="media/pusheen/pusheen.png" type="image/x-icon">
 </head>
 <body>
+    <div class="stars"></div>
     <div class="app-container">
         <img src="media/pusheen/pusheen.png" alt="Pusheen" class="pusheen-cat pusheen-left">
         <img src="media/pusheen/pusheen.png" alt="Pusheen" class="pusheen-cat pusheen-right">
@@ -25,15 +27,29 @@
         <div class="heart-container">
             <!-- Tekst kochany -->
             <div class="text-part">
-                <div class="gallery" style="display: none;"></div>
                 <h1>mmmmega cie kocham</h1>
                 <!-- <h2>robilem to mg dlugo..</h2> -->
                 <h3>mam nadzieje ze na telefonie tez wyglada db 🥺 🥺</h3>
-                <p>troche ponerdzikowalem ale masz takiego chlopa..</p>
+                <p>troche ponerdzikowalem ale masz takiego chlopa cn, jeszcze musze poprawic spotify i te liczniki trch bo niechce ich pod soba</p>
+            </div>
+
+            <!-- Galeria -->
+            <div class="gallery-container">
+                <div class="gallery-slideshow">
+                    <!-- Images will be added by JavaScript -->
+                </div>
+                <div class="gallery-controls">
+                    <button class="gallery-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="gallery-btn play-pause-btn"><i class="fas fa-pause"></i></button>
+                    <button class="gallery-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="gallery-dots">
+                    <!-- Dots will be added by JavaScript -->
+                </div>
             </div>
 
             <!-- Licznik -->
-            <div class="timer" style="display: none;">
+            <div class="timer">
                 <h2>Jestesmy razem od...</h2>
                 <span id="time-amount">
                     <p id="time-days">dni...</p>
@@ -45,7 +61,7 @@
         </div>
 
         <!-- Nawigacja -->
-        <ul>
+        <ul class="nav-buttons">
             <li><button id="main">glowny</button></li>
             <li><button id="gallery">galeria</button></li>
             <li><button id="cute">top 10 uwu</button></li>
