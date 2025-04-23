@@ -48,6 +48,25 @@ const galleryImages = [
     { src: "media/photos/9.jpg" }
 ];
 
+// Cute text array
+
+const cuteTexts = [
+    "mmega cie kocham ❤️",
+    "adi cwel",
+    "jestes mmmmmmmmmmmega slodka",
+    "type shit wiesz ocb",
+    "najbardziej misie podoba ze masz mega luz do mn i moge robic co chce przy tb i nie ma problem",
+    "jestes mega przesliczna i naprawde nkumam jak to mozliwe ze kuzia byla taka rozchwytywana chb ze ty taka cicha myszka poprostu",
+    "boneka ambalabu",
+    "i mg ci nawet wybaczyc to twoje ogladanie genzie 😭 😭",
+    "sorki ze nie kumam jaki masz kolor oczu i widze jakies kolory co nie istnieja ale misie mega podobajom cn.....",
+    "wiem ze mega nie lubisz gadki na halowen ale dla mn bd to chb najlepsza gadka z kimkolwiek w moim zyciu 😭 😭",
+    "mega essa ze sie wyjebalas na adiego i zrobilas miejsca dla mn",
+    "janmg wgl mega dzieki za wszystko co mi dalas sorki jak czasami reaguje jak zjeb ale mega doceniam..........",
+    "mega misie podobasz ❤️❤️❤️❤️❤️❤️❤️❤️❤️",
+    "i wgl wchuj sie ciesze ze tak twoi rodzice mn lubia myslalem ze stwierdza janmg ale zjeb ale chb tez sie ciesza z mn"
+];
+
 // Relationship start date
 const startDate = new Date("2025-01-27T00:00:00");
 
@@ -211,10 +230,36 @@ startButton.addEventListener("click", () => {
     showView("timer");
 });
 
-// Cute button - to be implemented
+// Przechowuj indeks ostatnio wybranego tekstu
+let lastCuteTextIndex = -1;
+
+// Cute button
 cuteButton.addEventListener("click", () => {
-    // Placeholder for future implementation
-    alert("To musze dokonczyc.. ❤️");
+    let randomIndex;
+
+    // Losuj nowy indeks, dopóki nie będzie inny niż poprzedni
+    do {
+        randomIndex = Math.floor(Math.random() * cuteTexts.length);
+    } while (randomIndex === lastCuteTextIndex);
+
+    // Zaktualizuj ostatni indeks
+    lastCuteTextIndex = randomIndex;
+
+    // Pobierz losowy tekst
+    const randomCuteText = cuteTexts[randomIndex];
+
+    // Ukryj inne widoki
+    textPart.style.display = "none";
+    timerDiv.style.display = "none";
+    galleryContainer.style.display = "none";
+
+    // Wyświetl losowy tekst w heart-container
+    const heartContainer = document.querySelector(".heart-container");
+    heartContainer.innerHTML = `
+        <div class="cute-text">
+            <h1>${randomCuteText}</h1>
+        </div>
+    `;
 });
 
 // Gallery controls
@@ -241,3 +286,24 @@ playPauseBtn.addEventListener("click", togglePlayPause);
 // Initialize stars and app
 createStars();
 showView("main");
+
+function showLoadingPage() {
+    const loadingPage = document.querySelector('.loading-page');
+    const progressGif = document.querySelector('.progress-gif');
+
+    let position = -200; // Początkowa pozycja GIF-a (poza ekranem)
+    const interval = setInterval(() => {
+        position += 10; // Przesuwaj GIF o 10px w prawo (zwiększono z 5px)
+        progressGif.style.left = `${position}px`;
+
+        // Sprawdź, czy GIF dotarł do końca ekranu
+        if (position >= window.innerWidth) {
+            clearInterval(interval);
+            loadingPage.style.display = 'none'; // Ukryj stronę ładowania
+            showView("main"); // Przejdź na stronę główną
+        }
+    }, 20); // Szybkość przesuwania (pozostawiono bez zmian)
+}
+
+// Wywołaj funkcję po załadowaniu strony
+window.addEventListener('load', showLoadingPage);
